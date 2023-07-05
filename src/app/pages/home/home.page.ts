@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { GmapsService } from 'src/app/services/gmaps.service';
-import { ActionSheetController, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { Store } from 'src/app/model/store';
 import { StoreService } from 'src/app/services/store.service';
 import { GeoPoint } from '@angular/fire/firestore';
@@ -98,7 +98,7 @@ export class HomePage implements OnInit {
       this.map = new googleMaps.Map(mapEl, {
         center: location,
         zoom: 13,
-        zoomControl: false,
+
         streetViewControl: false,
         fullscreenControl: false,
         styles: mapStyle,
@@ -118,12 +118,12 @@ export class HomePage implements OnInit {
         }
       });
 
-      this.loading.dismiss();
+      if (this.map) {
+        this.loading.dismiss();
+      }
 
       this.directionsService = new googleMaps.DirectionsService();
       this.directionsDisplay = new googleMaps.DirectionsRenderer();
-
-      console.log(this.googleMaps);
 
       this.addMarkersForStores();
       this.addMarkersForMylocation(this.position);

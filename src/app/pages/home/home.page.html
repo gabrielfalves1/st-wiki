@@ -1,17 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-content>
+  <div class="search-container">
+    <!-- Div de pesquisa aqui -->
     <ion-searchbar
       [(ngModel)]="address"
       (ionInput)="searchAddress($event)"
       placeholder="Onde você está?"
     ></ion-searchbar>
-    <ion-list [hidden]="!(searchResults && searchResults.length > 0)">
+    <ion-list
+      class="ion-margin-horizontal"
+      *ngIf="(searchResults && searchResults.length > 0)"
+    >
       <ion-item
         (click)="getAddress(result.description)"
         *ngFor="let result of searchResults"
@@ -19,7 +17,9 @@
         {{result.description}}
       </ion-item>
     </ion-list>
+  </div>
 
-    <div #map id="map"></div>
-  </ion-content>
+  <div #map id="map">
+    <!-- Div do mapa aqui -->
+  </div>
 </ion-content>
