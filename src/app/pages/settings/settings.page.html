@@ -1,0 +1,16 @@
+<ion-content [fullscreen]="true">
+  <div class="app-container">
+    <div class="nav-btn">
+      <a (click)="goBack()"
+        ><ion-img src="assets/nav-btn.svg" alt="botão de voltar"></ion-img
+      ></a>
+    </div>
+
+    <ion-title>Preferências</ion-title>
+
+    <div routerLink="/location" class="pref" style="margin-top: 30px">
+      <ion-icon name="location-sharp"></ion-icon>
+      <ion-title>Mudar localização</ion-title>
+    </div>
+  </div>
+</ion-content>

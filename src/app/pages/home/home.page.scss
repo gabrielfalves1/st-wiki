@@ -16,8 +16,16 @@
     --background: #fff;
     --color: black;
   }
+
+
+  .block {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
-  io-list {
-    --background: #fff;
-    --color: black;
+  ion-modal {
+    --height: auto;
   }

@@ -1,0 +1,95 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon class="open-menu" name="menu-sharp"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="user-profile">
+    <ion-title>Perfil da Loja</ion-title>
+    <ion-avatar class="spinner-overlay">
+      <img [src]="imageSrc" [alt]="store.nome" />
+      <p class="ion-text-center" (click)="takePhoto()">Selecionar Foto</p>
+      <ion-spinner name="dots" *ngIf="photoLoading"></ion-spinner>
+    </ion-avatar>
+
+    <div class="update">
+      <form #fc="ngForm">
+        <ion-item>
+          <ion-label>Cep:</ion-label>
+          <ion-input
+            name="cep"
+            (ionBlur)="searchCep($event)"
+            [(ngModel)]="store.cep"
+            maxlength="9"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Rua:</ion-label>
+          <ion-input name="rua" [(ngModel)]="store.rua" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Número:</ion-label>
+          <ion-input
+            name="numero"
+            [(ngModel)]="store.numero"
+            required
+            maxlength="6"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Cidade:</ion-label>
+          <ion-input
+            name="cidade"
+            [(ngModel)]="store.cidade"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Estado:</ion-label>
+          <ion-input
+            name="estado"
+            [(ngModel)]="store.estado"
+            required
+          ></ion-input>
+        </ion-item>
+
+        <span *ngIf="fd === 'error'"
+          ><p class="fd" style="color: red">
+            Não foi possível atualizar dados
+          </p></span
+        >
+
+        <span *ngIf="fd === 'success'"
+          ><p class="fd-success" style="color: green; text-align: center">
+            Dados atualizados com sucesso!
+          </p></span
+        >
+      </form>
+
+      <div class="button-update ion-text-center">
+        <ion-button
+          [disabled]="fc.invalid || isLoading"
+          (click)="update()"
+          style="--background: var(--ion-color-default); --color: #ffffff"
+        >
+          <ion-spinner *ngIf="isLoading"></ion-spinner>
+          <span *ngIf="!isLoading">Editar</span>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
+#map {
+    width: 400px;
+    height: 400px;
+   margin: auto;
+   margin-top: 15px;
+  }
+  
+.app-container {
+    padding: 20px 0;
+    color: black;
+}
+
+ion-searchbar {
+    --background: #FFFFFF;
+    --color: black
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+ion-searchbar,ion-list,ion-item {
+    font-family: 'Quicksand', sans-serif;
+    color: black;
+    background-color: #FFFFFF;
+    --background: #FFFFFF;
+    max-width: 400px;
+    margin: auto;
+}
+
+ion-item {
+    border: 1px solid black;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 10px;
+}
+
+ion-button {
+    --border-radius: 15px;
+    font-size: 18px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.nav-btn {
+    color: var(--ion-color-default);
+    display: flex;
+  }

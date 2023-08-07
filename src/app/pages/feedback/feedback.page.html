@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon class="open-menu" name="menu-sharp"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="app-container">
+    <div class="feedback">
+      <ion-title>Feedback</ion-title>
+
+      <div style="font-size: 20px; color: var(--ion-color-default)">
+        Deixe sua opinião
+      </div>
+      <div style="font-size: 25px">Contamos com você!</div>
+      <ion-img src="assets/feedback.png" alt="feedback do usuário"></ion-img>
+      <ion-title>Dê seu FEEDBACK</ion-title>
+
+      <form #fc="ngForm">
+        <ion-item lines="none">
+          <ion-textarea
+            maxlength="231"
+            required
+            name="message"
+            [(ngModel)]="feedback.message"
+            style="--border-color: black"
+          ></ion-textarea>
+        </ion-item>
+      </form>
+      <ion-button
+        [disabled]="fc.invalid"
+        (click)="save()"
+        style="--background: var(--ion-color-default); --color: #ffffff"
+        ><ion-spinner *ngIf="isLoading"></ion-spinner
+        ><span *ngIf="!isLoading">Enviar</span>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

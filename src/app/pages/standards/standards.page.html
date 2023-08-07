@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon class="open-menu" name="menu-sharp"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="app-container">
+    <ion-title>Normas</ion-title>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Normas Regulamentadoras - GOV</ion-card-title>
+      </ion-card-header>
+      <div class="custom-divider"></div>
+      <ion-card-content>
+        <ion-button (click)="redirectToURL()">Acessar</ion-button>
+      </ion-card-content>
+
+      <div class="normas">
+        Cada atualização das normas regulamentadoras(NR) serão notificadas no
+        email do perfil cadastrado pelo usuário.
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

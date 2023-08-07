@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap');
+
+.app-container {
+    background-color: #F0F0F1;
+    border-radius: 0 0 150px 150px;
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+  }
+
+  .title {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 39px;
+    color: var(--ion-color-default);
+    }
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+@media(max-height: 760px) {
+  .logo {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+
+  ion-item {
+    border-radius: 15px;
+    color: black;
+    --background: transparent;
+    box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.1);
+    width: 303px;
+    height: 44px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+  .login {
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   gap: 10px;
+  }
+
+  .login-title {
+    color: var(--ion-color-default);
+    font-weight: 600;
+    font-size: 22px;
+    display: flex;
+    width: 303px;
+  }
+
+.forgot-password {
+    color:var(--ion-color-default);
+    font-weight: 600;
+    display: flex;
+    justify-content: end;
+    width: 303px;
+}
+
+  
+  ion-button {
+    --background: #FFFFFF;
+    --color: var(--ion-color-default);
+    --border-color: var(--ion-color-default);
+    --border-radius: 15px;
+    width: 303px;
+    height: 60px;
+    font-size: 23px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+  }
+  
+  

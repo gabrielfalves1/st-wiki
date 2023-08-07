@@ -1,3 +1,88 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <div
+          class="header-logo ion-text-center"
+          (click)="navigateTo('/user-options')"
+        >
+          <ion-img
+            src="assets/logo.png"
+            style="width: 50px; height: 50px"
+            alt="logo de st-wiki"
+          ></ion-img>
+          <div>ST Wiki</div>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content style="--color: black">
+      <div class="user-area">
+        <div class="user">
+          <div class="avatar">
+            <ion-avatar>
+              <img
+                alt="Silhouette of a person's head"
+                [src]="imageSrc"
+                [alt]="user.nome"
+              />
+            </ion-avatar>
+          </div>
+          <ion-title class="ion-text-center" style="margin-top: 5px">{{
+            nome
+          }}</ion-title>
+          <div class="button">
+            <ion-button
+              *ngIf="userType === 'user'"
+              fill="outline"
+              (click)="navigateTo('/user-profile')"
+            >
+              Editar Perfil
+            </ion-button>
+
+            <ion-button
+              *ngIf="userType === 'store'"
+              fill="outline"
+              (click)="navigateTo('/store-profile')"
+            >
+              Perfil da Loja
+            </ion-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-options">
+        <div class="nav-item">
+          <ion-icon name="storefront-sharp"></ion-icon>
+          <ion-title (click)="navigateTo('/stores')">Mapa de lojas</ion-title>
+        </div>
+        <div class="nav-item">
+          <ion-icon name="document-text-sharp"></ion-icon>
+          <ion-title (click)="navigateTo('/standards')">Normas</ion-title>
+        </div>
+        <div class="nav-item">
+          <ion-icon name="book-sharp"></ion-icon>
+          <ion-title (click)="navigateTo('/glossary')">Glossário</ion-title>
+        </div>
+        <div class="nav-item">
+          <ion-icon name="chatbubbles-sharp"></ion-icon>
+          <ion-title (click)="navigateTo('/feedback')">Feedback</ion-title>
+        </div>
+
+        <div class="nav-item">
+          <ion-icon name="settings-sharp"></ion-icon>
+          <ion-title (click)="navigateTo('/settings')">Preferências</ion-title>
+        </div>
+      </div>
+
+      <div style="padding-top: 40%">
+        <ion-title
+          (click)="logout()"
+          style="--color: var(--ion-color-default); text-decoration: underline"
+        >
+          Sair
+        </ion-title>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

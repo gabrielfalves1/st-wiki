@@ -1,0 +1,76 @@
+<ion-content [fullscreen]="true">
+  <div class="app-container">
+    <div class="nav-btn">
+      <a routerLink="/tabs/tab3"
+        ><ion-img src="assets/nav-btn.svg" alt="botão de voltar"></ion-img
+      ></a>
+    </div>
+
+    <div class="user-register">
+      <div>Cadastro de Usuário</div>
+      <ion-img
+        src="assets/user-register.png"
+        alt="Logo de st wiki"
+        style="width: 375px; height: 214px"
+      ></ion-img>
+    </div>
+  </div>
+
+  <div class="register">
+    <form #fc="ngForm">
+      <ion-item lines="none">
+        <ion-label>Nome:</ion-label>
+        <ion-input
+          [(ngModel)]="user.nome"
+          name="nome"
+          pattern="^[a-zA-ZÀ-ÿ\s]+$"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>Telefone:</ion-label>
+        <ion-input
+          [(ngModel)]="user.telefone"
+          name="telefone"
+          (ionInput)="formatPhone()"
+          maxlength="15"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="Email">
+        <ion-label>Email:</ion-label>
+        <ion-input
+          type="email"
+          [(ngModel)]="user.email"
+          name="email"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="Senha">
+        <ion-label>Senha:</ion-label>
+        <ion-input
+          [(ngModel)]="user.senha"
+          name="senha"
+          required
+          minlength="6"
+          type="password"
+        ></ion-input>
+      </ion-item>
+    </form>
+  </div>
+
+  <div class="button ion-text-center">
+    <ion-button
+      [disabled]="fc.invalid || isLoading || registerSuccess"
+      (click)="save()"
+      style="--background: var(--ion-color-default); --color: #ffffff"
+    >
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Cadastrar</span>
+    </ion-button>
+  </div>
+</ion-content>

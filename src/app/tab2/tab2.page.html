@@ -1,17 +1,46 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="app-container ion-text-center">
+    <ion-title class="ion-text-center title">
+      <div class="logo">
+        <ion-img src="assets/logo.png" alt="Logo de st wiki" style="width: 153px; height: 167px"></ion-img>
+        <div style="font-family: 'Saira Stencil One', cursive; font-size: 50px">
+          ST Wiki
+        </div>
+      </div>
+    </ion-title>
+  </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div class="login">
+    <p class="login-title">Login:</p>
+    <form #fc="ngForm">
+      <ion-item lines="none">
+        <ion-label>Email:</ion-label>
+        <ion-input [(ngModel)]="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          required></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>Senha:</ion-label>
+        <ion-input type="{{ showPassword ? 'text' : 'password' }}" [(ngModel)]="senha" name="senha"
+          required></ion-input>
+        <ion-icon style="color: var(--ion-color-default)" slot="end" name="{{ showPassword ? 'eye-off' : 'eye' }}"
+          (click)="togglePasswordVisibility()"></ion-icon>
+      </ion-item>
+    </form>
+    <p class="forgot-password" (click)="openAlert()" routerLink="/tabs/reset">Esqueci minha senha</p>
+  </div>
+  <span>
+    <p style="text-align: center; color: red">{{message}}</p>
+  </span>
+  <div class="button ion-text-center">
+    <ion-button [disabled]="fc.invalid" (click)="enter()"
+      style="--background: var(--ion-color-default); --color: #ffffff" routerLink="/tabs/tab2"><ion-spinner
+        *ngIf="isLoading"></ion-spinner><span *ngIf="!isLoading">Entrar</span>
+      <ion-icon name="chevron-forward-outline" *ngIf="!isLoading"></ion-icon>
+    </ion-button>
+
+    <ion-button fill="outline" routerLink="/tabs/tab3">Cadastrar-se
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-button>
+  </div>
 </ion-content>

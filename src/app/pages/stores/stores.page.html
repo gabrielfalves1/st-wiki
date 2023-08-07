@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon class="open-menu" name="menu-sharp"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="dataLoaded">
+  <div class="app-container">
+    <ion-title class="ion-text-center">Lojas de EPI's</ion-title>
+
+    <ion-card class="main-card">
+      <ion-card
+        [routerLink]="'/view-store/' + store._id"
+        class="card-options"
+        *ngFor="let store of stores"
+      >
+        <ion-card-header>
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <ion-avatar>
+              <img [alt]="store.nome" [src]="store.foto" />
+            </ion-avatar>
+          </div>
+        </ion-card-header>
+        <div class="custom-divider"></div>
+        <ion-card-content>
+          <ion-card-title>{{store.nome}}</ion-card-title>
+        </ion-card-content>
+      </ion-card>
+    </ion-card>
+  </div>
+</ion-content>

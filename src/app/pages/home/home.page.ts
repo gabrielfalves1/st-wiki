@@ -10,6 +10,8 @@ import { LoadingController } from '@ionic/angular';
 import { Store } from 'src/app/model/store';
 import { StoreService } from 'src/app/services/store.service';
 import { GeoPoint } from '@angular/fire/firestore';
+import { ActionSheetController } from '@ionic/angular';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -39,7 +41,8 @@ export class HomePage implements OnInit {
     private gmaps: GmapsService,
     private renderer: Renderer2,
     private loadingCtrl: LoadingController,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private actionSheetCtrl: ActionSheetController
   ) {}
 
   ngOnInit() {
@@ -56,10 +59,97 @@ export class HomePage implements OnInit {
   async loadMap() {
     const mapStyle = [
       {
+        elementType: 'geometry',
+        stylers: [
+          {
+            color: '#242f3e',
+          },
+        ],
+      },
+      {
+        elementType: 'labels.text.fill',
+        stylers: [
+          {
+            color: '#746855',
+          },
+        ],
+      },
+      {
+        elementType: 'labels.text.stroke',
+        stylers: [
+          {
+            color: '#242f3e',
+          },
+        ],
+      },
+      {
+        featureType: 'administrative.locality',
+        elementType: 'labels.text.fill',
+        stylers: [
+          {
+            color: '#d59563',
+          },
+        ],
+      },
+      {
+        featureType: 'poi',
+        elementType: 'labels.text',
+        stylers: [
+          {
+            visibility: 'off',
+          },
+        ],
+      },
+      {
+        featureType: 'poi',
+        elementType: 'labels.text.fill',
+        stylers: [
+          {
+            color: '#d59563',
+          },
+        ],
+      },
+      {
         featureType: 'poi.business',
         stylers: [
           {
             visibility: 'off',
+          },
+        ],
+      },
+      {
+        featureType: 'poi.park',
+        elementType: 'geometry',
+        stylers: [
+          {
+            color: '#263c3f',
+          },
+        ],
+      },
+      {
+        featureType: 'poi.park',
+        elementType: 'labels.text.fill',
+        stylers: [
+          {
+            color: '#6b9a76',
+          },
+        ],
+      },
+      {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [
+          {
+            color: '#38414e',
+          },
+        ],
+      },
+      {
+        featureType: 'road',
+        elementType: 'geometry.stroke',
+        stylers: [
+          {
+            color: '#212a37',
           },
         ],
       },
@@ -73,10 +163,91 @@ export class HomePage implements OnInit {
         ],
       },
       {
+        featureType: 'road',
+        elementType: 'labels.text.fill',
+        stylers: [
+          {
+            color: '#9ca5b3',
+          },
+        ],
+      },
+      {
+        featureType: 'road.highway',
+        elementType: 'geometry',
+        stylers: [
+          {
+            color: '#746855',
+          },
+        ],
+      },
+      {
+        featureType: 'road.highway',
+        elementType: 'geometry.stroke',
+        stylers: [
+          {
+            color: '#1f2835',
+          },
+        ],
+      },
+      {
+        featureType: 'road.highway',
+        elementType: 'labels.text.fill',
+        stylers: [
+          {
+            color: '#f3d19c',
+          },
+        ],
+      },
+      {
         featureType: 'transit',
         stylers: [
           {
             visibility: 'off',
+          },
+        ],
+      },
+      {
+        featureType: 'transit',
+        elementType: 'geometry',
+        stylers: [
+          {
+            color: '#2f3948',
+          },
+        ],
+      },
+      {
+        featureType: 'transit.station',
+        elementType: 'labels.text.fill',
+        stylers: [
+          {
+            color: '#d59563',
+          },
+        ],
+      },
+      {
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [
+          {
+            color: '#17263c',
+          },
+        ],
+      },
+      {
+        featureType: 'water',
+        elementType: 'labels.text.fill',
+        stylers: [
+          {
+            color: '#515c6d',
+          },
+        ],
+      },
+      {
+        featureType: 'water',
+        elementType: 'labels.text.stroke',
+        stylers: [
+          {
+            color: '#17263c',
           },
         ],
       },
@@ -98,9 +269,10 @@ export class HomePage implements OnInit {
       this.map = new googleMaps.Map(mapEl, {
         center: location,
         zoom: 13,
-
         streetViewControl: false,
         fullscreenControl: false,
+        clickableIcons: false,
+        zoomControl: false,
         styles: mapStyle,
         mapTypeControlOptions: {
           mapTypeIds: [],
@@ -138,7 +310,7 @@ export class HomePage implements OnInit {
     let googleMaps: any = this.googleMaps;
 
     for (const store of this.stores) {
-      const geopoint: GeoPoint | undefined = store.coordenadas;
+      /*const geopoint: GeoPoint | undefined = store.coordenadas;
 
       if (geopoint) {
         const latitude = geopoint.latitude;
@@ -158,11 +330,13 @@ export class HomePage implements OnInit {
 
         marker.addListener('click', () => {
           this.removePolylines();
+
+          this.presentActionSheet(store);
           this.calculateAndDisplayRoute(marker.getPosition());
         });
 
         this.markers.push(marker);
-      }
+      }*/
     }
   }
 
@@ -297,5 +471,29 @@ export class HomePage implements OnInit {
       .catch((error) => {
         console.log('Erro ao obter endereço:', error);
       });
+  }
+
+  async presentActionSheet(store: any) {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Opções do Marcador',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'Opção 1',
+          handler: () => {
+            console.log('Opção 1 selecionada');
+          },
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Ação cancelada');
+          },
+        },
+      ],
+    });
+
+    await actionSheet.present();
   }
 }

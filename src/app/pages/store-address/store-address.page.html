@@ -1,0 +1,79 @@
+<ion-content [fullscreen]="true">
+  <div class="app-container">
+    <div class="nav-btn">
+      <a routerLink="/tabs/storeRegister"
+        ><ion-img src="assets/nav-btn.svg" alt="botão de voltar"></ion-img
+      ></a>
+    </div>
+
+    <div class="user-register">
+      <div>Preencha o endereço</div>
+      <ion-img
+        src="assets/user-register.png"
+        alt="Logo de st wiki"
+        style="width: 375px; height: 214px"
+      ></ion-img>
+    </div>
+  </div>
+
+  <div class="register">
+    <form #fc="ngForm">
+      <ion-item>
+        <ion-label>Cep:</ion-label>
+        <ion-input
+          name="cep"
+          (ionBlur)="searchCep($event)"
+          [(ngModel)]="store.cep"
+          maxlength="9"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Rua:</ion-label>
+        <ion-input name="rua" [(ngModel)]="store.rua" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Número:</ion-label>
+        <ion-input
+          name="numero"
+          [(ngModel)]="store.numero"
+          required
+          maxlength="6"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Cidade:</ion-label>
+        <ion-input
+          name="cidade"
+          [(ngModel)]="store.cidade"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Estado:</ion-label>
+        <ion-input
+          name="estado"
+          [(ngModel)]="store.estado"
+          required
+        ></ion-input>
+      </ion-item>
+    </form>
+  </div>
+
+  <div class="button ion-text-center">
+    <ion-button
+      (click)="save()"
+      [disabled]="fc.invalid || isLoading || registerSuccess"
+      style="--background: var(--ion-color-default); --color: #ffffff"
+    >
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Cadastrar</span>
+      <ion-icon *ngIf="!isLoading" name="chevron-forward-outline"></ion-icon>
+    </ion-button>
+  </div>
+</ion-content>

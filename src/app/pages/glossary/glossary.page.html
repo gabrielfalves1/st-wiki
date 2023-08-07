@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon class="open-menu" name="menu-sharp"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="app-container">
+    <div class="glossary">
+      <ion-title>Glossário</ion-title>
+
+      <ion-searchbar
+        (ionInput)="handleInput($event)"
+        placeholder=""
+      ></ion-searchbar>
+      <ion-card *ngFor="let acronym of filteredAcronyms">
+        <ion-card-header>
+          <ion-card-title>{{acronym.name}}</ion-card-title>
+        </ion-card-header>
+        <div class="custom-divider"></div>
+        <ion-card-content>{{acronym.desc}}</ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

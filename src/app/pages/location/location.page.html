@@ -1,0 +1,53 @@
+<ion-content [fullscreen]="true">
+  <div class="app-container">
+    <div class="nav-btn" *ngIf="locationExists">
+      <a (click)="goBack()"
+        ><ion-img src="assets/nav-btn.svg" alt="botão de voltar"></ion-img
+      ></a>
+    </div>
+
+    <ion-title class="ion-text-center" *ngIf="!showOptions"
+      >Onde você está?</ion-title
+    >
+
+    <div class="search-container">
+      <!-- Div de pesquisa aqui -->
+      <ion-searchbar
+        *ngIf="!showOptions"
+        [(ngModel)]="address"
+        (ionInput)="searchAddress($event)"
+        placeholder="Onde você está?"
+      ></ion-searchbar>
+      <ion-list
+        class="ion-margin-horizontal"
+        *ngIf="(searchResults && searchResults.length > 0)"
+      >
+        <ion-item
+          lines="none"
+          (click)="getAddress(result.description)"
+          *ngFor="let result of searchResults"
+        >
+          {{result.description}}
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div #map id="map"></div>
+    <ion-title
+      *ngIf="showOptions"
+      class="ion-text-center"
+      style="margin-top: 10px"
+      >Você está aqui?</ion-title
+    >
+    <div class="button" *ngIf="showOptions">
+      <ion-button
+        (click)="confirm()"
+        style="--background: var(--ion-color-default); --color: #ffffff"
+        >Sim</ion-button
+      >
+      <ion-button (click)="cancel()" style="--background: red; --color: #ffffff"
+        >Não</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

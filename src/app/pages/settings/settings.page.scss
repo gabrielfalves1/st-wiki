@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
+.app-container {
+    font-family: 'Quicksand', sans-serif;
+    color: black;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.nav-btn {
+    color: var(--ion-color-default);
+    display: flex;
+  }
+
+.pref {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   padding: 0 60px;
+}

@@ -1,0 +1,83 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon class="open-menu" name="menu-sharp"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="app-container">
+    <ion-title class="ion-text-center">Navegação</ion-title>
+    <ion-card class="main-card">
+      <ion-card routerLink="/stores" class="card-options">
+        <ion-card-header>
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <ion-icon name="storefront-outline"></ion-icon>
+          </div>
+        </ion-card-header>
+        <div class="custom-divider"></div>
+        <ion-card-content>
+          <ion-card-title>LOJAS DE EPI's</ion-card-title>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card routerLink="/standards" class="card-options">
+        <ion-card-header>
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <ion-icon name="document-text-outline"></ion-icon>
+          </div>
+        </ion-card-header>
+        <div class="custom-divider"></div>
+        <ion-card-content>
+          <ion-card-title>NORMAS</ion-card-title>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card routerLink="/glossary" class="card-options">
+        <ion-card-header>
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <ion-icon name="book-outline"></ion-icon>
+          </div>
+        </ion-card-header>
+        <div class="custom-divider"></div>
+        <ion-card-content>
+          <ion-card-title>GLOSSÁRIO</ion-card-title>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card
+        [routerLink]="userType === 'user' ? '/user-profile' : '/store-profile'"
+        class="card-options"
+      >
+        <ion-card-header>
+          <div
+            style="display: flex; align-items: center; justify-content: center"
+          >
+            <ion-icon
+              *ngIf="userType === 'user'"
+              class="ion-text-center"
+              name="person-outline"
+            ></ion-icon>
+            <ion-icon
+              *ngIf="userType === 'store'"
+              name="storefront-sharp"
+            ></ion-icon>
+          </div>
+        </ion-card-header>
+        <div class="custom-divider"></div>
+        <ion-card-content>
+          <ion-card-title>{{profileTitle}}</ion-card-title>
+        </ion-card-content>
+      </ion-card>
+    </ion-card>
+  </div>
+</ion-content>

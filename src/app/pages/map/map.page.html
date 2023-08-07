@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="nav-btn">
+      <a routerLink="/stores">
+        <ion-img src="assets/nav-btn.svg" alt="botão de voltar"></ion-img
+      ></a>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div #map id="map"></div>
+  <ion-modal [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <div class="block">
+        <div class="loja">
+          <ion-avatar [routerLink]="'/view-store/' + store._id">
+            <img alt="Silhouette of a person's head" [src]="imageSrc" />
+          </ion-avatar>
+
+          <ion-item lines="none">
+            <ion-input
+              [(ngModel)]="store.nome"
+              name="nome"
+              readonly
+            ></ion-input>
+          </ion-item>
+        </div>
+
+        <ion-item lines="none">
+          <ion-label>Tel:</ion-label>
+          <ion-input
+            [(ngModel)]="store.telefone"
+            name="telefone"
+            readonly
+          ></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label>Email:</ion-label>
+          <ion-input
+            [(ngModel)]="store.email"
+            name="email"
+            readonly
+          ></ion-input>
+        </ion-item>
+
+        <div class="routes" (click)="calculateRoute()">
+          <ion-img src="assets/routes-icon.png"></ion-img>
+          <ion-title style="--color: black">Rotas</ion-title>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>

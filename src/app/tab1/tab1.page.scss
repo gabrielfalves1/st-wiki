@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap');
+
+.app-container {
+    background-color: #F0F0F1;
+    border-radius: 0 0 150px 150px;
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+  }
+
+.title {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 39px;
+    color: var(--ion-color-default);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+ion-button {
+  --background: #FFFFFF;
+  --color: var(--ion-color-default);
+  --border-color: var(--ion-color-default);
+  --border-radius: 15px;
+  width: 303px;
+  height: 60px;
+  font-size: 23px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+

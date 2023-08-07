@@ -1,31 +1,30 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GmapsService {
-
-  constructor() { }
-
+  constructor() {}
 
   loadGoogleMaps(): Promise<any> {
     const win = window as any;
     const gModule = win.google;
-    if(gModule && gModule.maps) {
-     return Promise.resolve(gModule.maps);
+    if (gModule && gModule.maps) {
+      return Promise.resolve(gModule.maps);
     }
     return new Promise((resolve, reject) => {
       const script = document.createElement('script');
       script.src =
         'https://maps.googleapis.com/maps/api/js?key=' +
-        environment.apiMapsKey + '&libraries=places';
+        environment.apiMapsKey +
+        '&libraries=places';
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
       script.onload = () => {
         const loadedGoogleModule = win.google;
-        if(loadedGoogleModule && loadedGoogleModule.maps) {
+        if (loadedGoogleModule && loadedGoogleModule.maps) {
           resolve(loadedGoogleModule.maps);
         } else {
           reject('Google Map SDK is not Available');
@@ -33,12 +32,4 @@ export class GmapsService {
       };
     });
   }
-
-
-
-
-
-
-
-
 }

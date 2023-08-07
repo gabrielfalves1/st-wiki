@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+  }
+
+.nav-btn {
+  color: var(--ion-color-default);
+  display: flex;
+  margin-top: 40px;
+}
+
+.user-select {
+display: flex;
+justify-content: center;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+.options-title {
+  color: var(--ion-color-default);
+  font-weight: 600;
+  font-size: 27px;
+  display: flex;
+}
+
+ion-button {
+  --background: #FFFFFF;
+  --color: var(--ion-color-default);
+  --border-color: var(--ion-color-default);
+  --border-radius: 15px;
+  width: 303px;
+  height: 60px;
+  font-size: 23px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+

@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <ion-icon class="open-menu" name="menu-sharp"></ion-icon>
+      </ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="app-container">
+    <ion-card>
+      <ion-card-title>{{store.nome}}</ion-card-title>
+      <ion-card-content>
+        <ion-img [src]="imageSrc"></ion-img>
+        <div class="dados">
+          <ion-title>Endereço</ion-title> {{store.rua}} {{store.numero}},
+          {{store.estado}}
+
+          <ion-title>Contato</ion-title> {{store.telefone}}
+          <br />{{store.email}}
+
+          <ion-button [routerLink]="'/map/' + store._id"
+            >Ver no mapa</ion-button
+          >
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
