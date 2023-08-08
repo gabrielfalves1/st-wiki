@@ -44,20 +44,27 @@ export class StoreAddressPage implements OnInit {
 
       if (cords) {
         this.store.coordenadas = new GeoPoint(cords.lat, cords.lng);
-
-        this.storeService.add(this.store);
-
-        this.storage.remove('storeData');
-
-        this.utilService.alert(
-          'sucesso',
-          'Loja cadastrada com sucesso! faça login para continuar'
-        );
-
+        await this.storeService.add(this.store);
+        this.utilService.alert('sucesso', 'Loja cadastrada com sucesso!');
         this.registerSuccess = true;
-        setTimeout(() => {
-          this.router.navigate(['/tabs/tab2']);
-        }, 3000);
+
+        const res = this.storeService
+          .getStoreIdByEmail(this.store.email)
+          .then(async (res) => {
+            const id = res;
+
+            const type = 'store';
+            const user_data = {
+              id: id,
+              type: type,
+            };
+
+            await this.storage.set('user', user_data);
+            this.router.navigateByUrl('/user-options').then(() => {
+              location.reload();
+              this.storage.remove('storeData');
+            });
+          });
       }
     } catch (err) {
       console.log(err);

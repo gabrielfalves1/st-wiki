@@ -17,7 +17,7 @@ export class StoresPage implements OnInit {
   stores: Store[] = [];
   store = new Store();
   loading: any;
-  dataLoaded = false; // Variável de controle
+  dataLoaded = false;
 
   ngOnInit() {
     this.getStores();
@@ -25,7 +25,10 @@ export class StoresPage implements OnInit {
 
   async getStores() {
     try {
-      this.loading = await this.loadingCtrl.create({});
+      this.loading = await this.loadingCtrl.create({
+        cssClass: 'my-loading-class',
+        spinner: 'dots',
+      });
       await this.loading.present();
       const res = await this.storeService.list();
       this.stores = <Store[]>res;
@@ -44,7 +47,7 @@ export class StoresPage implements OnInit {
       console.error('Erro ao buscar:', error);
     } finally {
       this.loading.dismiss();
-      this.dataLoaded = true; // Define como true após os dados serem carregados
+      this.dataLoaded = true;
     }
   }
 }

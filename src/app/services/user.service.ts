@@ -32,7 +32,7 @@ import {
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
   private auth: Auth = inject(Auth);
   private readonly storage: Storage = inject(Storage);
   private firestore: Firestore = inject(Firestore);
@@ -139,6 +139,18 @@ export class UserService {
     }
   }
 
+  async getUserIdByEmail(email: string) {
+    const q = query(this.userCollection, where('email', '==', email));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const docSnapshot = querySnapshot.docs[0];
+      return docSnapshot.id;
+    } else {
+      return null;
+    }
+  }
+
   async searchEmail(email: string) {
     const resultUser = await getDocs(
       query(this.userCollection, where('email', '==', email))
@@ -166,21 +178,13 @@ export class UserService {
     return result;
   }
 
-
-
   async userRecovery(email: string) {
-
-    return await sendPasswordResetEmail(this.auth, email).then(() => {
-      console.log("email enviado com sucesso");
-
-    }).catch((error) => {
-      console.log(error)
-
-    })
-
-
+    return await sendPasswordResetEmail(this.auth, email)
+      .then(() => {
+        console.log('email enviado com sucesso');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
-
-
-
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { AuthGuard } from '../guards/auth-guard.guard';
 import { isAuth } from '../guards/is-auth-guard.guard';
+import { ConnectivityGuard } from '../guards/connectivity.guard';
 
 const routes: Routes = [
   {
@@ -17,17 +18,19 @@ const routes: Routes = [
       },
       {
         path: 'tab2',
-        canActivate: [isAuth],
+        canActivate: [isAuth, ConnectivityGuard],
         loadChildren: () =>
           import('../tab2/tab2.module').then((m) => m.Tab2PageModule),
       },
       {
         path: 'tab3',
+        canActivate: [isAuth, ConnectivityGuard],
         loadChildren: () =>
           import('../tab3/tab3.module').then((m) => m.Tab3PageModule),
       },
       {
         path: 'userRegister',
+        canActivate: [isAuth, ConnectivityGuard],
         loadChildren: () =>
           import('../pages/user-register/user-register.module').then(
             (m) => m.UserRegisterPageModule
@@ -35,6 +38,7 @@ const routes: Routes = [
       },
       {
         path: 'storeRegister',
+        canActivate: [isAuth, ConnectivityGuard],
         loadChildren: () =>
           import('../pages/store-register/store-register.module').then(
             (m) => m.StoreRegisterPageModule

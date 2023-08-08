@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { Network } from '@capacitor/network';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,15 @@ export class UtilsService {
     } catch (err) {
       console.log(err);
       return null;
+    }
+  }
+
+  async checkNetwork() {
+    const status = await Network.getStatus();
+    if (status.connected === true) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

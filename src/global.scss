@@ -29,3 +29,19 @@
 ion-content {
     --background: #FFFFFF; 
   }
+
+  ion-loading.my-loading-class {
+    .loading-wrapper {
+      --spinner-color: var(--ion-color-default);
+      background: transparent;
+      box-shadow: none;
+
+    }
+  }
+
+  ion-spinner {
+    transform: scale(2);
+}
+
+
+

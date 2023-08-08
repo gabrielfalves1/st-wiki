@@ -110,6 +110,18 @@ export class StoreService {
     return { _id: result.id, ...result.data() };
   }
 
+  async getStoreIdByEmail(email: string) {
+    const q = query(this.storeCollection, where('email', '==', email));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const docSnapshot = querySnapshot.docs[0];
+      return docSnapshot.id;
+    } else {
+      return null;
+    }
+  }
+
   async setPhotoPerfil(imgName: string, imgBase64: string, id: string) {
     this.get(id).then(async (res) => {
       this.store = <Store>res;

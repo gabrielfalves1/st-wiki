@@ -2,21 +2,19 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth-guard.guard';
 import { isAuth } from './guards/is-auth-guard.guard';
+import { ConnectivityGuard } from './guards/connectivity.guard';
+import { IsConnectGuard } from './guards/is-connect.guard';
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [ConnectivityGuard],
     loadChildren: () =>
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
-    path: 'home',
-    loadChildren: () =>
-      import('./pages/home/home.module').then((m) => m.HomePageModule),
-  },
-  {
     path: 'user-register',
-    canActivate: [isAuth],
+    canActivate: [isAuth, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/user-register/user-register.module').then(
         (m) => m.UserRegisterPageModule
@@ -24,7 +22,7 @@ const routes: Routes = [
   },
   {
     path: 'store-register',
-    canActivate: [isAuth],
+    canActivate: [isAuth, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/store-register/store-register.module').then(
         (m) => m.StoreRegisterPageModule
@@ -32,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'store-address',
-    canActivate: [isAuth],
+    canActivate: [isAuth, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/store-address/store-address.module').then(
         (m) => m.StoreAddressPageModule
@@ -40,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'user-options',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/user-options/user-options.module').then(
         (m) => m.UserOptionsPageModule
@@ -48,7 +46,7 @@ const routes: Routes = [
   },
   {
     path: 'user-profile',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/user-profile/user-profile.module').then(
         (m) => m.UserProfilePageModule
@@ -56,7 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'glossary',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/glossary/glossary.module').then(
         (m) => m.GlossaryPageModule
@@ -64,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: 'standards',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/standards/standards.module').then(
         (m) => m.StandardsPageModule
@@ -72,7 +70,7 @@ const routes: Routes = [
   },
   {
     path: 'feedback',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/feedback/feedback.module').then(
         (m) => m.FeedbackPageModule
@@ -80,19 +78,19 @@ const routes: Routes = [
   },
   {
     path: 'stores',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/stores/stores.module').then((m) => m.StoresPageModule),
   },
   {
     path: 'map/:id',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/map/map.module').then((m) => m.MapPageModule),
   },
   {
     path: 'store-profile',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/store-profile/store-profile.module').then(
         (m) => m.StoreProfilePageModule
@@ -100,7 +98,7 @@ const routes: Routes = [
   },
   {
     path: 'address-profile',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/address-profile/address-profile.module').then(
         (m) => m.AddressProfilePageModule
@@ -108,7 +106,7 @@ const routes: Routes = [
   },
   {
     path: 'view-store/:id',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/view-store/view-store.module').then(
         (m) => m.ViewStorePageModule
@@ -116,7 +114,7 @@ const routes: Routes = [
   },
   {
     path: 'location',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/location/location.module').then(
         (m) => m.LocationPageModule
@@ -124,11 +122,17 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, ConnectivityGuard],
     loadChildren: () =>
       import('./pages/settings/settings.module').then(
         (m) => m.SettingsPageModule
       ),
+  },
+  {
+    path: 'error',
+    canActivate: [IsConnectGuard],
+    loadChildren: () =>
+      import('./pages/error/error.module').then((m) => m.ErrorPageModule),
   },
 ];
 @NgModule({

@@ -1,0 +1,14 @@
+<ion-content [fullscreen]="true">
+  <div class="app-content">
+    <div class="error">
+      <ion-title>Erro ao acessar o App...</ion-title>
+      <ion-img src="assets/error-image.png"></ion-img>
+      <div>Verifique sua conexão com a internet e tente novamente.</div>
+
+      <ion-button (click)="refresh()"
+        ><span *ngIf="!isLoading">Atualizar</span>
+        <ion-spinner *ngIf="isLoading"></ion-spinner>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

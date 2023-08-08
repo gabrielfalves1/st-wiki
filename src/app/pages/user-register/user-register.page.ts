@@ -3,8 +3,8 @@ import { User } from 'src/app/model/user';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
-import { NgForm } from '@angular/forms';
 import { StoreService } from 'src/app/services/store.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-user-register',
@@ -19,7 +19,8 @@ export class UserRegisterPage implements OnInit {
     private userService: UserService,
     private storeService: StoreService,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private storage: Storage
   ) {}
 
   ngOnInit() {}
@@ -53,14 +54,26 @@ export class UserRegisterPage implements OnInit {
         this.presentAlert('Aviso', 'Email já cadastrado em nosso sistema');
       } else {
         await this.userService.add(this.user);
-        this.presentAlert(
-          'Aviso',
-          'Cadastrado com sucesso! Faça login para continuar'
-        );
+
+        this.presentAlert('Aviso', 'Cadastrado com sucesso!');
         this.registerSuccess = true;
-        setTimeout(() => {
-          this.router.navigate(['/tabs/tab2']);
-        }, 3000);
+
+        const res = this.userService
+          .getUserIdByEmail(this.user.email)
+          .then(async (res) => {
+            const id = res;
+
+            const type = 'user';
+            const user_data = {
+              id: id,
+              type: type,
+            };
+
+            await this.storage.set('user', user_data);
+            this.router.navigateByUrl('/user-options').then(() => {
+              location.reload();
+            });
+          });
       }
     } catch (err) {
       console.log(err);

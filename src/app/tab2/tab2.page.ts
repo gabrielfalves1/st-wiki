@@ -7,7 +7,12 @@ import { LoginService } from '../services/login.service';
 import { UserService } from '../services/user.service';
 import { StoreService } from '../services/store.service';
 import { UtilsService } from '../services/util.service';
-import { AlertButton, AlertController, AlertInput, LoadingController } from '@ionic/angular';
+import {
+  AlertButton,
+  AlertController,
+  AlertInput,
+  LoadingController,
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -28,12 +33,15 @@ export class Tab2Page {
     private router: Router,
     private storage: Storage,
     private alertController: AlertController,
-    private loadingCtrl: LoadingController
-  ) { }
+    private loadingCtrl: LoadingController,
+    private utilService: UtilsService
+  ) {}
   private auth: Auth = inject(Auth);
   pageLoading: any;
 
-  async ngOnInit() { }
+  async ngOnInit() {
+    this.checkNetwork();
+  }
 
   async enter() {
     this.isLoading = true;
@@ -85,7 +93,6 @@ export class Tab2Page {
     this.showPassword = !this.showPassword;
   }
 
-
   public alertInputs: AlertInput[] = [
     {
       name: 'email',
@@ -98,16 +105,15 @@ export class Tab2Page {
     {
       text: 'Cancelar',
       role: 'cancel',
-      handler: () => { },
+      handler: () => {},
     },
     {
       text: 'Enviar',
       handler: async (data) => {
-        this.userRecovery(data.email)
+        this.userRecovery(data.email);
       },
     },
   ];
-
 
   async openAlert() {
     const alert = await this.alertController.create({
@@ -119,28 +125,23 @@ export class Tab2Page {
     await alert.present();
   }
 
-
   async userRecovery(email: string) {
     try {
       this.pageLoading = await this.loadingCtrl.create({
         spinner: 'circles',
       });
 
-
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
       if (emailRegex.test(email)) {
-
         await this.userService.userRecovery(email).then(async (res) => {
           const alert = await this.alertController.create({
-            header: 'Redefinição de senha enviada para o seu email com sucesso!',
+            header:
+              'Redefinição de senha enviada para o seu email com sucesso!',
             buttons: ['Fechar'],
           });
           await alert.present();
-
-
         });
-
       } else {
         const alert = await this.alertController.create({
           header: 'Email inválido',
@@ -149,15 +150,18 @@ export class Tab2Page {
         });
         await alert.present();
       }
-
-
-
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
       this.pageLoading.dismiss();
     }
   }
 
+  async checkNetwork() {
+    const networkStatus = this.utilService.checkNetwork();
+
+    if ((await networkStatus) === false) {
+      this.router.navigate(['/error']);
+    }
+  }
 }
