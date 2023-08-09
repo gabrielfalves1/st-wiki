@@ -50,4 +50,11 @@ export class StoresPage implements OnInit {
       this.dataLoaded = true;
     }
   }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      event.target.complete();
+      location.reload();
+    }, 2000);
+  }
 }

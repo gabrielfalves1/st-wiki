@@ -19,7 +19,7 @@ export class AppComponent {
     private router: Router,
     private menuController: MenuController,
     private storage: Storage
-  ) { }
+  ) {}
 
   user = new User();
   store = new Store();
@@ -27,6 +27,7 @@ export class AppComponent {
   nome: string | undefined;
   route = '';
   userType: string | undefined;
+  dataLoaded = false;
 
   ngOnInit() {
     this.getUser();
@@ -50,26 +51,23 @@ export class AppComponent {
           this.nome = nomeParts[0] + ' ' + nomeParts[nomeParts.length - 1];
         }
 
-
         if (this.user.foto) {
           await this.userService.getPhotoPerfil(this.user.foto).then((res) => {
             this.imageSrc = res;
           });
         }
+        this.dataLoaded = true;
       });
     } else {
       this.storeService.get(id).then(async (res) => {
         this.store = <Store>res;
         const nomeParts = this.store.nome.split(' ');
 
-
         if (nomeParts.length === 1) {
           this.nome = nomeParts[0];
         } else {
           this.nome = nomeParts[0] + ' ' + nomeParts[nomeParts.length - 1];
         }
-
-
 
         if (this.store.foto) {
           await this.storeService
@@ -78,6 +76,7 @@ export class AppComponent {
               this.imageSrc = res;
             });
         }
+        this.dataLoaded = true;
       });
     }
   }

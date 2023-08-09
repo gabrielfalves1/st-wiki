@@ -29,19 +29,27 @@
 ion-content {
     --background: #FFFFFF; 
   }
-
   ion-loading.my-loading-class {
     .loading-wrapper {
       --spinner-color: var(--ion-color-default);
       background: transparent;
       box-shadow: none;
-
+      ion-spinner {
+        transform: scale(2);
+    }
     }
   }
 
-  ion-spinner {
-    transform: scale(2);
-}
+  ion-refresher.refresher-native .refresher-pulling-icon, ion-refresher.refresher-native .refresher-refreshing-icon {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+  }
 
-
-
+  ion-refresher.refresher-native ion-spinner {
+    color: black;
+  }
+  ion-refresher ion-refresher-content .refresher-pulling .refresher-pulling-icon ion-icon {
+    color: black ;
+    
+  }

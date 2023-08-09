@@ -8,8 +8,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="dataLoaded">
-  <div class="app-container">
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="app-container" *ngIf="dataLoaded">
     <ion-title class="ion-text-center">Lojas de EPI's</ion-title>
 
     <ion-card class="main-card">

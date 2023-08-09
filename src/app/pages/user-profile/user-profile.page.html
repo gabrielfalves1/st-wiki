@@ -17,7 +17,11 @@
     <ion-avatar class="spinner-overlay">
       <img [src]="imageSrc" [alt]="user.nome" />
       <p class="ion-text-center" (click)="takePhoto()">Selecionar Foto</p>
-      <ion-spinner name="dots" *ngIf="photoLoading"></ion-spinner>
+      <ion-spinner
+        class="spinner-photo"
+        name="dots"
+        *ngIf="photoLoading"
+      ></ion-spinner>
     </ion-avatar>
 
     <div class="update">

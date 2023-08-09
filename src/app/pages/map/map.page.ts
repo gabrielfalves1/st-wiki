@@ -26,7 +26,7 @@ export class MapPage implements OnInit {
     private storeService: StoreService,
     private storage: Storage,
     private modalCtrl: ModalController
-  ) { }
+  ) {}
   @ViewChild('map', { static: true })
   mapElementRef!: ElementRef;
   googleMaps: any;
@@ -81,7 +81,8 @@ export class MapPage implements OnInit {
 
     try {
       this.loading = await this.loadingCtrl.create({
-        message: 'Carregando Mapa...',
+        cssClass: 'my-loading-class',
+        spinner: 'dots',
       });
       await this.loading.present();
 
