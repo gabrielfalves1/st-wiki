@@ -11,7 +11,7 @@
 <ion-content [fullscreen]="true">
   <div class="app-container">
     <ion-title class="ion-text-center">Navegação</ion-title>
-    <ion-card class="main-card">
+    <ion-card class="main-card" *ngIf="dataLoaded">
       <ion-card routerLink="/stores" class="card-options">
         <ion-card-header>
           <div

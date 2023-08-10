@@ -32,6 +32,7 @@ export class AddressProfilePage implements OnInit {
   store = new Store();
   pageLoading: any;
   isLoading = false;
+  loading: any;
   imageSrc: string | undefined;
   photoLoading = false;
   fd: string = '';
@@ -42,13 +43,19 @@ export class AddressProfilePage implements OnInit {
   }
 
   async getStore() {
+    this.loading = await this.loadingCtrl.create({
+      cssClass: 'my-loading-class',
+      spinner: 'dots',
+    });
+    await this.loading.present();
+
     this.imageSrc = 'assets/avatar.svg';
     await this.storage.create();
     const store = await this.storage.get('user');
     const id = store.id;
     this.storeService.get(id).then(async (res) => {
       this.store = <Store>res;
-
+      this.loading.dismiss();
       if (this.store.foto) {
         await this.storeService.getPhotoPerfil(this.store.foto).then((res) => {
           this.imageSrc = res;
@@ -92,6 +99,7 @@ export class AddressProfilePage implements OnInit {
     const res = await this.utilService.searchCep(event.target.value);
     this.store.rua = res.logradouro;
     this.store.cidade = res.localidade;
+    this.store.estado = res.uf;
   }
 
   async getCoordinates(address: string): Promise<{ lat: number; lng: number }> {

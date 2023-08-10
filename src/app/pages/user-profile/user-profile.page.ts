@@ -121,7 +121,8 @@ export class UserProfilePage implements OnInit {
   async updateEmail(email: string) {
     try {
       this.pageLoading = await this.loadingCtrl.create({
-        spinner: 'circles',
+        cssClass: 'my-loading-class',
+        spinner: 'dots',
       });
 
       this.pageLoading.present();
@@ -133,6 +134,7 @@ export class UserProfilePage implements OnInit {
           const alert = await this.alertController.create({
             header: 'Endereço de email já cadastrado em nossa plataforma',
             buttons: ['Fechar'],
+            cssClass: 'fd-alert',
           });
           await alert.present();
         } else {
@@ -140,6 +142,7 @@ export class UserProfilePage implements OnInit {
           if (updateRes) {
             const alert = await this.alertController.create({
               header: 'Email Atualizado com sucesso!',
+              cssClass: 'fd-alert',
               buttons: ['Fechar'],
             });
             await alert.present();
@@ -147,6 +150,7 @@ export class UserProfilePage implements OnInit {
           } else {
             const alert = await this.alertController.create({
               header: 'Necessário refazer login para trocar o email',
+              cssClass: 'fd-alert',
               buttons: ['Fechar'],
             });
             await alert.present();
@@ -160,6 +164,7 @@ export class UserProfilePage implements OnInit {
         const alert = await this.alertController.create({
           header: 'Email inválido',
           message: 'Informe um endereço de email válido',
+          cssClass: 'fd-alert',
           buttons: ['Fechar'],
         });
         await alert.present();
@@ -174,6 +179,7 @@ export class UserProfilePage implements OnInit {
   async openAlert() {
     const alert = await this.alertController.create({
       header: 'Atualize seu email',
+      cssClass: 'email-alert',
       buttons: this.alertButtons,
       inputs: this.alertInputs,
     });

@@ -27,6 +27,7 @@ export class StoreProfilePage implements OnInit {
   store = new Store();
   pageLoading: any;
   isLoading = false;
+  loading: any;
   imageSrc: string | undefined;
   photoLoading = false;
   fd: string = '';
@@ -85,13 +86,19 @@ export class StoreProfilePage implements OnInit {
   }
 
   async getStore() {
+    this.loading = await this.loadingCtrl.create({
+      cssClass: 'my-loading-class',
+      spinner: 'dots',
+    });
+    await this.loading.present();
+
     this.imageSrc = 'assets/avatar.svg';
     await this.storage.create();
     const store = await this.storage.get('user');
     const id = store.id;
     this.storeService.get(id).then(async (res) => {
       this.store = <Store>res;
-
+      this.loading.dismiss();
       if (this.store.foto) {
         await this.storeService.getPhotoPerfil(this.store.foto).then((res) => {
           this.imageSrc = res;
@@ -119,7 +126,8 @@ export class StoreProfilePage implements OnInit {
   async updateEmail(email: string) {
     try {
       this.pageLoading = await this.loadingCtrl.create({
-        spinner: 'circles',
+        cssClass: 'my-loading-class',
+        spinner: 'dots',
       });
 
       this.pageLoading.present();
@@ -130,6 +138,7 @@ export class StoreProfilePage implements OnInit {
         if (res) {
           const alert = await this.alertController.create({
             header: 'Endereço de email já cadastrado em nossa plataforma',
+            cssClass: 'fd-alert',
             buttons: ['Fechar'],
           });
           await alert.present();
@@ -138,6 +147,7 @@ export class StoreProfilePage implements OnInit {
           if (updateRes) {
             const alert = await this.alertController.create({
               header: 'Email Atualizado com sucesso!',
+              cssClass: 'fd-alert',
               buttons: ['Fechar'],
             });
             await alert.present();
@@ -145,6 +155,7 @@ export class StoreProfilePage implements OnInit {
           } else {
             const alert = await this.alertController.create({
               header: 'Necessário refazer login para trocar o email',
+              cssClass: 'fd-alert',
               buttons: ['Fechar'],
             });
             await alert.present();
@@ -158,6 +169,7 @@ export class StoreProfilePage implements OnInit {
         const alert = await this.alertController.create({
           header: 'Email inválido',
           message: 'Informe um endereço de email válido',
+          cssClass: 'fd-alert',
           buttons: ['Fechar'],
         });
         await alert.present();
@@ -172,6 +184,7 @@ export class StoreProfilePage implements OnInit {
   async openAlert() {
     const alert = await this.alertController.create({
       header: 'Atualize seu email',
+      cssClass: 'email-alert',
       buttons: this.alertButtons,
       inputs: this.alertInputs,
     });

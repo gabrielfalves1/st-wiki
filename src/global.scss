@@ -53,3 +53,61 @@ ion-content {
     color: black ;
     
   }
+
+  .alert-wrapper.sc-ion-alert-md {
+    background: #FFFFFF;
+    color: black;
+    font-family: 'Quicksand', sans-serif;
+    
+    .alert-title.sc-ion-alert-md {
+      color: black;
+      text-align: center;
+     }
+     
+
+     .alert-input.sc-ion-alert-md {
+      color: black;
+      font-size: 18px;
+     }
+
+     .alert-input.sc-ion-alert-md:focus {
+      border-bottom: 2px solid black;
+     }
+
+     .alert-button.sc-ion-alert-md {
+    color: var(--ion-color-default);
+    font-weight: bold;
+    font-size: 15px;
+     }
+
+     .alert-button.sc-ion-alert-md.alert-button-role-cancel {
+      color: black;
+     }
+
+     .alert-message.sc-ion-alert-md {
+      text-align: center;
+     }
+
+  }
+  
+  .alert-message.sc-ion-alert-md, .alert-input-group.sc-ion-alert-md {
+    color: black;
+  }
+
+  .fd-alert.sc-ion-alert-md-h {
+    --min-height: 200px
+  }
+
+  .email-alert.sc-ion-alert-md-h {
+    --min-width: 200px;
+    --min-height: 300px;
+
+    .alert-head.sc-ion-alert-md {
+    padding-top: 60px;
+    }
+  } 
+
+  .alert-radio-label.sc-ion-alert-md  {
+    color: black;
+  }
+

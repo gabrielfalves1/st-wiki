@@ -60,6 +60,13 @@
           type="password"
         ></ion-input>
       </ion-item>
+      <span
+        style="color: red"
+        *ngIf="fc.controls['senha'] ? fc.controls['senha'].invalid : false "
+        ><p style="text-align: center">
+          A senha deve ter no mínimo 6 caracteres
+        </p></span
+      >
     </form>
   </div>
 

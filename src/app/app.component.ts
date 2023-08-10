@@ -84,10 +84,12 @@ export class AppComponent {
   logout() {
     this.userService
       .logoff()
-      .then(() => {
-        this.storage.remove('user');
+      .then(async () => {
+        await this.storage.remove('user');
         this.menuController.close();
-        this.router.navigate(['/tabs/tab2']);
+        this.router.navigateByUrl('/tabs/tab2').then(() => {
+          location.reload();
+        });
       })
       .catch((error) => {
         console.error(error);

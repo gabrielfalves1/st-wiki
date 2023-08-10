@@ -77,6 +77,7 @@ export class StoreAddressPage implements OnInit {
     const res = await this.utilService.searchCep(event.target.value);
     this.store.rua = res.logradouro;
     this.store.cidade = res.localidade;
+    this.store.estado = res.uf;
   }
 
   async getCoordinates(address: string): Promise<{ lat: number; lng: number }> {

@@ -72,8 +72,14 @@ export class StoreService {
     });
   }
 
-  async list() {
-    const result = await getDocs(query(this.collection));
+  async list(state: string) {
+    const result = await getDocs(
+      query(
+        this.storeCollection,
+        where('ativo', '==', true),
+        where('estado', '==', state)
+      )
+    );
     return result.docs.map((doc) => ({ _id: doc.id, ...doc.data() }));
   }
 

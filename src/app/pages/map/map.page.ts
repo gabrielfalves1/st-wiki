@@ -161,16 +161,25 @@ export class MapPage implements OnInit {
     infoWindow.open(this.map, marker);
 
     marker.addListener('click', () => {
-      //this.calculateAndDisplayRoute(marker.getPosition());
       this.openModal();
     });
 
     this.markers.push(marker);
   }
 
-  calculateRoute() {
-    if (this.modal) this.modal.dismiss();
-    this.calculateAndDisplayRoute(this.geopoint);
+  async calculateRoute() {
+    const origin = await this.gmaps.getAddressFromCoordinates(
+      this.position.lat,
+      this.position.lng
+    );
+
+    const dest = await this.gmaps.getAddressFromCoordinates(
+      this.geopoint.lat,
+      this.geopoint.lng
+    );
+
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${origin},}&destination=${dest},&travelmode=driving`;
+    window.open(url, '_system');
   }
 
   async getParams() {
@@ -206,59 +215,6 @@ export class MapPage implements OnInit {
       this.position.lat = coords.lat;
       this.position.lng = coords.lng;
     }
-  }
-
-  calculateAndDisplayRoute(destination: any) {
-    const directionsRequest = {
-      origin: new this.googleMaps.LatLng(this.position.lat, this.position.lng),
-      destination: destination,
-      travelMode: 'DRIVING',
-    };
-
-    this.directionsService.route(
-      directionsRequest,
-      (result: { routes: any[] }, status: string) => {
-        if (status === 'OK') {
-          this.directionsDisplay.setDirections(result);
-
-          const route = result.routes[0];
-          const polyline = new this.googleMaps.Polyline({
-            path: [],
-            geodesic: true,
-            strokeColor: 'green',
-            strokeOpacity: 1.0,
-            strokeWeight: 2,
-          });
-
-          this.polylines.push(polyline);
-
-          route.legs.forEach((leg: { steps: any[] }) => {
-            leg.steps.forEach((step) => {
-              const path = google.maps.geometry.encoding.decodePath(
-                step.polyline!.points
-              );
-              path.forEach((point) => {
-                polyline.getPath().push(point);
-              });
-            });
-          });
-
-          polyline.setMap(this.map);
-
-          const bounds = new this.googleMaps.LatLngBounds();
-          route.legs.forEach((leg: { steps: any[] }) => {
-            leg.steps.forEach((step) => {
-              step.lat_lngs.forEach((latLng: any) => {
-                bounds.extend(latLng);
-              });
-            });
-          });
-          this.map.fitBounds(bounds);
-        } else {
-          console.log('Falha ao obter direções:', status);
-        }
-      }
-    );
   }
 
   async openModal() {

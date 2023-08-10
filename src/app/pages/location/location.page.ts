@@ -77,7 +77,8 @@ export class LocationPage implements OnInit {
 
     try {
       this.loading = await this.loadingCtrl.create({
-        message: 'Carregando Mapa...',
+        cssClass: 'my-loading-class',
+        spinner: 'dots',
       });
       await this.loading.present();
 

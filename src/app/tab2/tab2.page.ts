@@ -49,6 +49,7 @@ export class Tab2Page {
 
     try {
       if (res === true) {
+        this.email = '';
         this.senha = '';
         const id = this.auth.currentUser?.uid;
 
@@ -79,8 +80,7 @@ export class Tab2Page {
           }
         }
       } else {
-        this.senha = '';
-        this.message = 'Usuário ou senha incorretos';
+        this.message = 'Email ou senha incorretos';
       }
     } catch (erro) {
       console.error(erro);
@@ -117,7 +117,8 @@ export class Tab2Page {
 
   async openAlert() {
     const alert = await this.alertController.create({
-      header: 'Digite seu email',
+      header: 'Recuperação de acesso',
+      cssClass: 'email-alert',
       buttons: this.alertButtons,
       inputs: this.alertInputs,
     });
@@ -128,8 +129,10 @@ export class Tab2Page {
   async userRecovery(email: string) {
     try {
       this.pageLoading = await this.loadingCtrl.create({
-        spinner: 'circles',
+        cssClass: 'my-loading-class',
+        spinner: 'dots',
       });
+      await this.pageLoading.present();
 
       const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -138,6 +141,7 @@ export class Tab2Page {
           const alert = await this.alertController.create({
             header:
               'Redefinição de senha enviada para o seu email com sucesso!',
+            cssClass: 'fd-alert',
             buttons: ['Fechar'],
           });
           await alert.present();
@@ -146,6 +150,7 @@ export class Tab2Page {
         const alert = await this.alertController.create({
           header: 'Email inválido',
           message: 'Informe um endereço de email válido',
+          cssClass: 'fd-alert',
           buttons: ['Fechar'],
         });
         await alert.present();
@@ -158,10 +163,18 @@ export class Tab2Page {
   }
 
   async checkNetwork() {
+    this.pageLoading = await this.loadingCtrl.create({
+      cssClass: 'my-loading-class',
+      spinner: 'dots',
+    });
+    await this.pageLoading.present();
+
     const networkStatus = this.utilService.checkNetwork();
 
     if ((await networkStatus) === false) {
       this.router.navigate(['/error']);
     }
+
+    this.pageLoading.dismiss();
   }
 }

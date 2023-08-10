@@ -12,10 +12,24 @@
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div class="app-container" *ngIf="dataLoaded">
+  <div class="app-container">
     <ion-title class="ion-text-center">Lojas de EPI's</ion-title>
 
-    <ion-card class="main-card">
+    <ion-item>
+      <ion-label class="label">Filtrar por estado</ion-label>
+      <ion-select
+        cancelText="Cancelar"
+        okText="Selecionar"
+        [value]="userState"
+        (ionChange)="selectedState($event)"
+      >
+        <ion-select-option *ngFor="let state of states"
+          >{{state}}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-card class="main-card" *ngIf="dataLoaded">
       <ion-card
         [routerLink]="'/view-store/' + store._id"
         class="card-options"
@@ -35,6 +49,12 @@
           <ion-card-title>{{store.nome}}</ion-card-title>
         </ion-card-content>
       </ion-card>
+
+      <div class="no-store" *ngIf="noStore">
+        <ion-card-title
+          >Nenhuma loja cadastrada para esta região.</ion-card-title
+        >
+      </div>
     </ion-card>
   </div>
 </ion-content>

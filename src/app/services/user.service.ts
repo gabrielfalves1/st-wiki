@@ -173,11 +173,6 @@ export class UserService {
     return await signOut(this.auth);
   }
 
-  async isAuthenticated() {
-    const result = this.auth.currentUser;
-    return result;
-  }
-
   async userRecovery(email: string) {
     return await sendPasswordResetEmail(this.auth, email)
       .then(() => {

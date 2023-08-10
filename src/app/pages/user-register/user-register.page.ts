@@ -55,7 +55,6 @@ export class UserRegisterPage implements OnInit {
       } else {
         await this.userService.add(this.user);
 
-        this.presentAlert('Aviso', 'Cadastrado com sucesso!');
         this.registerSuccess = true;
 
         const res = this.userService
