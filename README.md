@@ -8,7 +8,7 @@ O aplicativo foi desenvolvido utilizando framework ionic com angular, com os dad
 ## Funcionalidades do aplicativo
 
 ### Cadastro de usuário
-Os clientes podem fazer cadastro simples no aplicativo.
+Os clientes podem fazer um cadastro simples no aplicativo.
 
 ### Cadastro de lojas
 Os vendedores podem fazer o cadastro de suas lojas. Elas aparecerão na listagem aleatoriamente para os usuários. 
