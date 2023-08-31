@@ -23,7 +23,7 @@ Os usuários podem procurar lojas nos bairros de sua preferência.
 Os clientes, ao acessar o perfil da loja, conseguem ver todas as informações sobre ela.
 
 
-## Instrução de uso.
+## Instruções de uso
 
 Faça um fork do projeto ou o obtenha com git. 
 
