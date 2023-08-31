@@ -17,7 +17,7 @@ Os vendedores podem fazer o cadastro de suas lojas. Elas aparecerão na listagem
 As lojas aparecem em ordem aleatória para os usuários em suas consultas.
 
 ### Mapeamento de lojas por meio do Google Maps
-Os usuários podem procurar lojas nos bairros de sua preferência.
+Os usuários podem procurar lojas nos estados de sua preferência.
 
 ### Fornecimento de contato e endereço das lojas
 Os clientes, ao acessar o perfil da loja, conseguem ver todas as informações sobre ela.
