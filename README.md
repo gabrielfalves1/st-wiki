@@ -22,6 +22,8 @@ Os usuários podem procurar lojas nos bairros de sua preferência.
 ### Fornecimento de contato e endereço das lojas
 Os clientes, ao acessar o perfil da loja, conseguem ver todas as informações sobre ela.
 
+![alt text](https://github.com/gabrielfalves1/st-wiki/blob/main/src/assets/Inicial.jpg)
+![alt text](https://github.com/gabrielfalves1/st-wiki/blob/main/src/assets/Lojas%20disponiveis.jpg)
 
 ## Instruções de uso
 
